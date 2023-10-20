@@ -11,19 +11,19 @@ const LoginFream = () => {
     const [password, setPassword] = useState('');
     const [login, setLogin] = useState(false);
 
-    const [loginBtn, setLoginBtn] = useState('btn btn-active w-52');
-    const [registerBtn, setRegisterBtn] = useState('btn w-52');
+    const [loginBtn, setLoginBtn] = useState('btn btn-active w-44');
+    const [registerBtn, setRegisterBtn] = useState('btn w-44');
 
     const onClickLoginBtn = () => {
-        setRegisterBtn('btn w-52');
-        setLoginBtn('btn btn-active w-52');
+        setRegisterBtn('btn w-44');
+        setLoginBtn('btn btn-active w-44');
 
         setPage('login');
     }
 
     const onClickRegisterBtn = () => {
-        setLoginBtn('btn w-52');
-        setRegisterBtn('btn btn-active w-52');
+        setLoginBtn('btn w-44');
+        setRegisterBtn('btn btn-active w-44');
 
         setPage('regist');
     }
