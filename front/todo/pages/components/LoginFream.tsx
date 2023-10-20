@@ -7,6 +7,7 @@ const LoginFream = () => {
     const [page, setPage] = useState('login');
 
     const [userId, setUserId] = useState('');
+    const [password, setPassword] = useState('');
 
     const [loginBtn, setLoginBtn] = useState('btn btn-active w-52');
     const [registerBtn, setRegisterBtn] = useState('btn w-52');
@@ -29,8 +30,13 @@ const LoginFream = () => {
         setUserId(newValue);
     }
 
+    const onChangePassword = (newValue: string) => {
+        setPassword(newValue);
+    }
+
     const onSubmit = () => {
         console.log(userId);
+        console.log(password);
     }
 
     return (
@@ -41,7 +47,7 @@ const LoginFream = () => {
             </div>
             <div className="flex flex-col justify-center items-center h-64">
                 <InputFormText placeholder='USERID' value={userId} onChange={onChangeUserId}></InputFormText><br/>
-                <input type="text" placeholder="PASSWORD" className="input input-bordered input-accent w-full max-w-xs" /><br/>
+                <InputFormText placeholder='PASSWORD' value={password} onChange={onChangePassword}></InputFormText><br/>
                 <button onClick={onSubmit} className="btn btn-wide w-full max-w-xs w-96 btn-outline btn-secondary">{page}</button>
             </div>
         </div>
