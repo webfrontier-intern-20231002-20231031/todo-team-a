@@ -33,11 +33,6 @@ const LoginFream = () => {
         console.log(userId);
     }
 
-
-    // #5
-    // 予定：コンポーネントごとにファイルを分ける->push
-
-
     return (
         <div className="flex flex-col items-center">
             <div className="btn-group">
