@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import InputFormText from './InputFormText';
+import SubmitFormBtn from './SubmitFormBtn';
 
 
 const LoginFream = () => {
@@ -8,6 +9,7 @@ const LoginFream = () => {
 
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
+    const [login, setLogin] = useState(false);
 
     const [loginBtn, setLoginBtn] = useState('btn btn-active w-52');
     const [registerBtn, setRegisterBtn] = useState('btn w-52');
@@ -34,7 +36,8 @@ const LoginFream = () => {
         setPassword(newValue);
     }
 
-    const onSubmit = () => {
+    const onSubmit = (getCompleted: boolean) => {
+        setLogin(getCompleted);
         console.log(userId);
         console.log(password);
     }
@@ -48,7 +51,7 @@ const LoginFream = () => {
             <div className="flex flex-col justify-center items-center h-64">
                 <InputFormText placeholder='USERID' value={userId} onChange={onChangeUserId}></InputFormText><br/>
                 <InputFormText placeholder='PASSWORD' value={password} onChange={onChangePassword}></InputFormText><br/>
-                <button onClick={onSubmit} className="btn btn-wide w-full max-w-xs w-96 btn-outline btn-secondary">{page}</button>
+                <SubmitFormBtn page={page} onSubmit={onSubmit}></SubmitFormBtn>
             </div>
         </div>
         )
