@@ -6,7 +6,7 @@ from sqlalchemy import pool
 
 from app.database import Base
 from app.settings import DATABASE_URL
-from models.todo import TodoModel, TagModel, TodoTagModel
+from models.todo import TodoModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
