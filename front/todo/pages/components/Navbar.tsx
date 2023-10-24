@@ -95,7 +95,7 @@ const NavBar = () => {
                         <div className="card w-10/12 bg-base-100 shadow-xl bg-indigo-800 ml-5">
                             <div className="card-body">
                                 <div className="flex justify-between">
-                                    <h2 className="card-title">Todo Title</h2>
+                                    <h2 className="card-title line-clamp-1">Todo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo Title</h2>
                                     <button className={"btn btn-outline btn-xs " + btnColor} onClick={() => { setCompleted(!completed); setBtnColor(completed ? "btn-error" : "btn-success") }}>{completed ? "COMPLETE" : "INCOMPLETE"}</button>
                                 </div>
                                 <div className="flex">
@@ -117,7 +117,12 @@ const NavBar = () => {
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 min-h-full bg-base-200">
                         {/* Sidebar content here */}
-                        <li onClick={() => { console.log('Hallo!') }}><a>Add Todo</a></li>
+                        <li onClick={() => {
+                            const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+                            if (modal) {
+                                modal.showModal();
+                            }
+                        }}><a>Add Todo</a></li>
                         <li onClick={() => { console.log('Hallo!') }}><a>Add Tag</a></li>
                         {/* <li><a>Sidebar Item 2</a></li> */}
                     </ul>
