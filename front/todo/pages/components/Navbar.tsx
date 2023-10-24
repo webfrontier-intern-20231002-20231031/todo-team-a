@@ -87,6 +87,14 @@ const Sort= () => {
         )
 }
 
+const Reload = () => {
+    return (
+        <div>
+            <label className="btn btn-outline btn-xs me-4 mb-4">RELOAD</label>
+        </div>
+        )
+}
+
 const NavBar = () => {
 
     const [completed,setCompleted] = useState(false);
@@ -127,7 +135,7 @@ const NavBar = () => {
                             {/* <div className="mt-6 me-5"><Sort /></div> */}
                         </div>
                         <div className="divider"></div>
-                        <div className="flex justify-end"><Sort /></div>
+                        <div className="flex justify-end"><Reload /><Sort /></div>
                         <div className="flex justify-center">
                             <div className="card w-11/12 bg-base-100 shadow-xl bg-indigo-800">
                                 <div className="card-body">
