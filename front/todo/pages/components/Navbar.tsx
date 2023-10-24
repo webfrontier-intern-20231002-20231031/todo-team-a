@@ -1,5 +1,45 @@
 import { useState } from "react";
 
+const Selector = () => {
+    return (<select className="select select-info w-full max-w-xs">
+        <option disabled selected>Selected Tag</option>
+        <option>none</option>
+        <option>School</option>
+        <option>Office</option>
+    </select>)
+}
+
+const Modal = () => {
+    return (
+        <>
+            {/* modal body */}
+            <dialog id="my_modal_1" className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">Input Todo</h3>
+                    <div className="ml-5">
+                    <p className="mt-5">Title</p>
+                    <input type="text" placeholder="Type here" className="input input-bordered input-info w-full max-w-xs mb-5" />
+                    <p>Tag</p>
+                    <Selector />
+                    <p className="mt-5">New Tag</p>
+                    <input type="text" placeholder="Type here" className="input input-bordered input-info w-full max-w-xs" />
+                    </div>
+                    <div className="modal-action">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-outline btn-secondary">CANCEL</button>
+                        </form>
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-outline btn-accent">CREATE</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+        </>
+        )
+}
+
 const NavBar = () => {
 
     const [completed,setCompleted] = useState(false);
@@ -22,7 +62,12 @@ const NavBar = () => {
                             <ul className="menu menu-horizontal">
                                 {/* Navbar menu content here */}
                                 {/* <li><a>Add</a></li> */}
-                                <li onClick={()=>{console.log('hall!')}}><a>Add Todo</a></li>
+                                <li onClick={() => {
+                                    const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+                                    if (modal) {
+                                        modal.showModal();
+                                    }
+                                }}><a>Add Todo</a></li>
                             </ul>
                         </div>
                     </div>
@@ -50,6 +95,7 @@ const NavBar = () => {
                             </div>
                         </div>
                     </div>
+                    <Modal />
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
