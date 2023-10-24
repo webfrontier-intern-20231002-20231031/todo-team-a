@@ -22,7 +22,25 @@ const NavBar = () => {
                     </div>
                     {/* Page content here */}
                     {/* Content */}
-                    
+                    <div className="flex flex-col w-full">
+                        <h1 className="text-5xl font-bold mt-5 ml-5">ALL Todo</h1>
+                        <div className="divider"></div>
+                        <div className="card  bg-base-100 shadow-xl">
+                            <div className="card-body">
+                                <h2 className="card-title">Todo Title</h2>
+                                <div className="flex">
+                                    <div>
+                                        <p>Owner: me990928</p>
+                                        <p>Tag: tag1, tag2, tag3</p>
+                                    </div>
+                                    <div className="ml-10">
+                                        <p>Created: 2023/10/24</p>
+                                        <p>Updated: 2023/10/24</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
