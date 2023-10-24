@@ -40,6 +40,18 @@ const Modal = () => {
         )
 }
 
+const Sort= () => {
+    return (
+        <div className="dropdown dropdown-bottom dropdown-end">
+            <label tabIndex={0} className="btn btn-outline m-1">Sort</label>
+            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-info-content rounded-box w-52">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </div>
+        )
+}
+
 const NavBar = () => {
 
     const [completed,setCompleted] = useState(false);
@@ -57,7 +69,8 @@ const NavBar = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                             </label>
                         </div>
-                        <div className="flex-1 px-2 mx-2"><h1>TodoList Application</h1></div>
+                        <div className="flex-1 px-2 mx-2">
+                            <h1>TodoList Application</h1></div>
                         <div className="flex-none hidden lg:block">
                             <ul className="menu menu-horizontal">
                                 {/* Navbar menu content here */}
@@ -74,7 +87,10 @@ const NavBar = () => {
                     {/* Page content here */}
                     {/* Content */}
                     <div className="flex flex-col w-full">
-                        <h1 className="text-5xl font-bold mt-5 ml-5">ALL Todo</h1>
+                        <div className="flex justify-between">
+                            <h1 className="text-5xl font-bold mt-5 ml-5">ALL Todo</h1>
+                            <div className="mt-6 me-5"><Sort /></div>
+                        </div>
                         <div className="divider"></div>
                         <div className="card w-10/12 bg-base-100 shadow-xl bg-indigo-800 ml-5">
                             <div className="card-body">
