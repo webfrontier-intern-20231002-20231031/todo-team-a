@@ -25,7 +25,7 @@ const NavBar = () => {
                     <div className="flex flex-col w-full">
                         <h1 className="text-5xl font-bold mt-5 ml-5">ALL Todo</h1>
                         <div className="divider"></div>
-                        <div className="card  bg-base-100 shadow-xl">
+                        <div className="card w-10/12 bg-base-100 shadow-xl bg-indigo-800 ml-5">
                             <div className="card-body">
                                 <h2 className="card-title">Todo Title</h2>
                                 <div className="flex">
