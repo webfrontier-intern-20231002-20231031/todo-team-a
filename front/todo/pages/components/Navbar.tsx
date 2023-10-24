@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SVGProps } from "react";
 
 const Selector = () => {
     return (<select className="select select-info w-full max-w-xs">
@@ -7,6 +8,13 @@ const Selector = () => {
         <option>School</option>
         <option>Office</option>
     </select>)
+}
+
+
+export function TdesignDelete(props: SVGProps<SVGSVGElement>) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M7.5 1h9v3H22v2h-2.029l-.5 17H4.529l-.5-17H2V4h5.5V1Zm2 3h5V3h-5v1ZM6.03 6l.441 15h11.058l.441-15H6.03ZM13 8v11h-2V8h2Z"></path></svg>
+    )
 }
 
 const Modal = () => {
@@ -40,10 +48,37 @@ const Modal = () => {
         )
 }
 
+const Modal2 = () => {
+    return (
+        <>
+            {/* modal body */}
+            <dialog id="my_modal_2" className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">Alert</h3>
+                    <div className="ml-5">
+                        <p className="mt-5">
+                            Are you sure you want to delete &quot;title&quot;?</p>
+                    </div>
+                    <div className="modal-action">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-outline btn-accent btn-xs">CANCEL</button>
+                        </form>
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-outline btn-secondary btn-xs">DELETE</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+        </>
+    )
+}
+
 const Sort= () => {
     return (
         <div className="dropdown dropdown-bottom dropdown-end">
-            <label tabIndex={0} className="btn btn-outline m-1">Sort</label>
+            <label tabIndex={0} className="btn btn-outline btn-xs me-4 mb-4">Sort</label>
             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-info-content rounded-box w-52">
                 <li><a>Added order</a></li>
                 <li><a>Update order</a></li>
@@ -89,29 +124,41 @@ const NavBar = () => {
                     <div className="flex flex-col w-full">
                         <div className="flex justify-between">
                             <h1 className="text-5xl font-bold mt-5 ml-5">ALL Todo</h1>
-                            <div className="mt-6 me-5"><Sort /></div>
+                            {/* <div className="mt-6 me-5"><Sort /></div> */}
                         </div>
                         <div className="divider"></div>
-                        <div className="card w-10/12 bg-base-100 shadow-xl bg-indigo-800 ml-5">
-                            <div className="card-body">
-                                <div className="flex justify-between">
-                                    <h2 className="card-title line-clamp-1">Todo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo Title</h2>
-                                    <button className={"btn btn-outline btn-xs " + btnColor} onClick={() => { setCompleted(!completed); setBtnColor(completed ? "btn-error" : "btn-success") }}>{completed ? "COMPLETE" : "INCOMPLETE"}</button>
-                                </div>
-                                <div className="flex">
-                                    <div>
-                                        <p>Owner: me990928</p>
-                                        <p>Tag: tag1, tag2, tag3</p>
+                        <div className="flex justify-end"><Sort /></div>
+                        <div className="flex justify-center">
+                            <div className="card w-11/12 bg-base-100 shadow-xl bg-indigo-800">
+                                <div className="card-body">
+                                    <div className="flex justify-between">
+                                        <h2 className="card-title line-clamp-1">Todo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo Title</h2>
+                                        <button className={"btn btn-outline btn-xs " + btnColor} onClick={() => { setCompleted(!completed); setBtnColor(completed ? "btn-error" : "btn-success") }}>{completed ? "COMPLETE" : "INCOMPLETE"}</button>
                                     </div>
-                                    <div className="ml-10">
-                                        <p>Created: 2023/10/24</p>
-                                        <p>Updated: 2023/10/24</p>
+                                    <div className="flex">
+                                        <div>
+                                            <p>Owner: me990928</p>
+                                            <p>Tag: tag1, tag2, tag3</p>
+                                        </div>
+                                        <div className="ml-10">
+                                            <p>Created: 2023/10/24</p>
+                                            <p>Updated: 2023/10/24</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-end">
+                                        <TdesignDelete onClick={() => {
+                                            const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
+                                            if (modal) {
+                                                modal.showModal();
+                                            }
+                                        }} className="w-6 h-6 text-right hover:text-red-700" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <Modal />
+                    <Modal2 />
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
