@@ -1,5 +1,7 @@
+import { debug } from "console";
 import { useState } from "react";
 import { SVGProps } from "react";
+import { useEffect } from "react";
 
 const Selector = () => {
     return (<select className="select select-info w-full max-w-xs">
@@ -85,20 +87,49 @@ const Sort= () => {
             </ul>
         </div>
         )
-}
+    }
 
 const Reload = () => {
     return (
         <div>
             <label className="btn btn-outline btn-xs me-4 mb-4">RELOAD</label>
         </div>
-        )
+    )
 }
 
 const NavBar = () => {
 
     const [completed,setCompleted] = useState(false);
     const [btnColor, setBtnColor] = useState("btn-success");
+    const [todoList, setTodoList] = useState([]);
+
+    // front用のflag処理
+    useEffect(() => {
+        if (completed) {
+            setBtnColor("btn-error");
+        } else {
+            setBtnColor("btn-success");
+        }
+    }, [completed])
+
+    // front用の全件取得処理
+    useEffect(() => {
+        getTodoList();
+    }, [])
+
+    const getTodoList = () => {
+        fetch("http://localhost:8000/todos")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setTodoList(data)
+            })
+            .catch(error => console.error(error));
+    }
+
+    const checkTodo = () => {
+        console.log(todoList);
+    }
 
     return (
         <>
@@ -135,7 +166,7 @@ const NavBar = () => {
                             {/* <div className="mt-6 me-5"><Sort /></div> */}
                         </div>
                         <div className="divider"></div>
-                        <div className="flex justify-end"><Reload /><Sort /></div>
+                        <div className="flex justify-end"><div onClick={getTodoList}><Reload /></div><Sort /></div>
                         <div className="flex justify-center">
                             <div className="card w-11/12 bg-base-100 shadow-xl bg-indigo-800">
                                 <div className="card-body">
