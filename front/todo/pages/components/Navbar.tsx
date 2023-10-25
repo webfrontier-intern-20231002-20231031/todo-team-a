@@ -8,6 +8,7 @@ import Sort from "./svg_button/sort";
 import TodoCard from "./card/todocard";
 
 interface Todo {
+    id: number;
     title: string;
     completed: boolean;
     user: string;
@@ -20,9 +21,54 @@ const m1_selector_placeholder = ["tag1", "tag2", "tag3"];
 
 const NavBar = () => {
 
-    const [completed,setCompleted] = useState(false);
+    // const [completed,setCompleted] = useState(false);
     const [btnColor, setBtnColor] = useState("btn-success");
     const [todoList, setTodoList] = useState<Todo[]>([]);
+
+    const [sortNum, setSortNum] = useState(0);
+
+    const todoCreatedSort = (a: Todo, b: Todo, f: number) => {
+        if (a.created < b.created) {
+            return -1;
+        }
+        if (a.created > b.created) {
+            return 1;
+        }
+        return 0;
+    }
+
+    const todoUpdatedSort = (a: Todo, b: Todo, f: number) => {
+        if (a.updated < b.updated) {
+            return -1;
+        }
+        if (a.updated > b.updated) {
+            return 1;
+        }
+        return 0;
+    }
+
+    const todoSort = (data: any, f: number) => {
+
+        var sortData;
+
+        switch (f) {
+            case 1:
+                sortData = data.sort(todoCreatedSort);
+                break;
+            case 2:
+                sortData = data.sort(todoCreatedSort).reverse();
+                break;
+            case 3:
+                sortData = data.sort(todoUpdatedSort);
+                break;
+            case 4:
+                sortData = data.sort(todoUpdatedSort).reverse();
+                break;
+            default:
+                sortData = data.sort(todoUpdatedSort);
+                break;
+        }
+    }
 
     // front用の全件取得処理
     useEffect(() => {
@@ -42,6 +88,8 @@ const NavBar = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                // const sortData = data.sort(todoCreatedSort);
+                const sortData = todoSort(data, sortNum);
                 setTodoList(data);
             })
             .catch(error => console.error(error));
@@ -50,6 +98,17 @@ const NavBar = () => {
     const checkTodo = () => {
         console.log(todoList);
     }
+
+
+    const handleTabIndexChange = (newTabIndex: number) => {
+        setSortNum(newTabIndex);
+    };
+
+    useEffect(() => {
+        console.log(sortNum);
+        const sortData = todoSort(todoList, sortNum);
+        setTodoList(todoList);
+    })
 
     return (
         <>
@@ -86,7 +145,7 @@ const NavBar = () => {
                             {/* <div className="mt-6 me-5"><Sort /></div> */}
                         </div>
                         <div className="divider"></div>
-                        <div className="flex justify-end"><div onClick={getTodoList}><Reload /></div><Sort /></div>
+                        <div className="flex justify-end"><div onClick={getTodoList}><Reload /></div><Sort sortNum={sortNum} onTabIndexChange={handleTabIndexChange}/></div>
                         <div className="flex flex-col items-center justify-center">
                             {/* <div className="card w-11/12 bg-base-100 shadow-xl bg-indigo-800">
                                 <div className="card-body">
