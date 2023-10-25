@@ -10,7 +10,7 @@ import TodoCard from "./card/todocard";
 interface Todo {
     title: string;
     completed: boolean;
-    owner: string;
+    user: string;
     tag: string[];
     created: string;
     updated: string;
@@ -30,7 +30,15 @@ const NavBar = () => {
     }, [])
 
     const getTodoList = () => {
-        fetch("http://localhost:8000/todos")
+        // fetch("http://localhost:8000/todos")
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         setTodoList(data);
+        //     })
+        //     .catch(error => console.error(error));
+
+        fetch("/api/mock")
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -106,10 +114,10 @@ const NavBar = () => {
                                     </div>
                                 </div>
                             </div> */}
-                            <TodoCard title="test" owner="test" tag={["tag1","tag2","tag3"]} created="2023/10/25" updated="2023/10/25" propBtnColor={btnColor} propCompleted={completed} />
+                            {/* <TodoCard title="test" owner="test" tag={["tag1","tag2","tag3"]} created="2023/10/25" updated="2023/10/25" propBtnColor={btnColor} propCompleted={completed} /> */}
                             {
                                 todoList.map((todo, index) => {
-                                    return <TodoCard key={index} title={todo.title} owner={todo.owner} tag={todo.tag} created={todo.created} updated={todo.updated} propBtnColor={btnColor} propCompleted={completed} />
+                                    return <TodoCard key={index} title={todo.title} owner={todo.user} tag={todo.tag} created={todo.created} updated={todo.updated} propBtnColor={btnColor} propCompleted={todo.completed} />
                                 })
                             }
                         </div>
@@ -127,7 +135,7 @@ const NavBar = () => {
                                 modal.showModal();
                             }
                         }}><a>Add Todo</a></li>
-                        <li onClick={() => { console.log('Hallo!') }}><a>Add Tag</a></li>
+                        {/* <li onClick={() => { console.log('Hallo!') }}><a>Add Tag</a></li> */}
                         {/* <li><a>Sidebar Item 2</a></li> */}
                     </ul>
                 </div>

@@ -26,9 +26,9 @@ const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted
     // front用のflag処理
     useEffect(() => {
         if (completed) {
-            setBtnColor("btn-error");
-        } else {
             setBtnColor("btn-success");
+        } else {
+            setBtnColor("btn-error");
         }
     }, [completed])
 
