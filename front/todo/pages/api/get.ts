@@ -2,12 +2,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-    if (req.method !== "POST") {
-        return new Response(null, { status: 400, statusText: "Must be POST method" });
+    if (req.method !== "GET") {
+        return new Response(null, { status: 400, statusText: "Must be GET method" });
     }
 
     await fetch("https://jsonplaceholder.typicode.com/todos/1", {
-        method: 'POST',
+        method: 'GET',
         body: JSON.stringify(req.body),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -25,11 +25,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 // export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-//   if (req.method !== "POST") {
-//       return new Response(null, { status: 400, statusText: "Must be POST method" });
+//   if (req.method !== "GET") {
+//       return new Response(null, { status: 400, statusText: "Must be GET method" });
 //   }
 
-//   await fetch("https://jsonplaceholder.typicode.com/todos/1")
+//   await fetch("localhost:8000/")
 //     .then(res => res.json())
 //     .then(json => {
 //       console.log(json);
