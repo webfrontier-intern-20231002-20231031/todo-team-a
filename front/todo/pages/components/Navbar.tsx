@@ -1,116 +1,28 @@
-import { debug } from "console";
 import { useState } from "react";
-import { SVGProps } from "react";
 import { useEffect } from "react";
+import { TdesignDelete } from "./svg_button/deleteButton";
+import Modal from "./modal/modal1";
+import Modal2 from "./modal/modal2";
+import Reload from "./svg_button/reload";
+import Sort from "./svg_button/sort";
+import TodoCard from "./card/todocard";
 
-const Selector = () => {
-    return (<select className="select select-info w-full max-w-xs">
-        <option disabled selected>Selected Tag</option>
-        <option>none</option>
-        <option>School</option>
-        <option>Office</option>
-    </select>)
+interface Todo {
+    title: string;
+    completed: boolean;
+    user: string;
+    tag: string[];
+    created: string;
+    updated: string;
 }
 
-
-export function TdesignDelete(props: SVGProps<SVGSVGElement>) {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M7.5 1h9v3H22v2h-2.029l-.5 17H4.529l-.5-17H2V4h5.5V1Zm2 3h5V3h-5v1ZM6.03 6l.441 15h11.058l.441-15H6.03ZM13 8v11h-2V8h2Z"></path></svg>
-    )
-}
-
-const Modal = () => {
-    return (
-        <>
-            {/* modal body */}
-            <dialog id="my_modal_1" className="modal">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg">Input Todo</h3>
-                    <div className="ml-5">
-                    <p className="mt-5">Title</p>
-                    <input type="text" placeholder="Type here" className="input input-bordered input-info w-full max-w-xs mb-5" />
-                    <p>Tag</p>
-                    <Selector />
-                    <p className="mt-5">New Tag</p>
-                    <input type="text" placeholder="Type here" className="input input-bordered input-info w-full max-w-xs" />
-                    </div>
-                    <div className="modal-action">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-outline btn-secondary">CANCEL</button>
-                        </form>
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-outline btn-accent">CREATE</button>
-                        </form>
-                    </div>
-                </div>
-            </dialog>
-        </>
-        )
-}
-
-const Modal2 = () => {
-    return (
-        <>
-            {/* modal body */}
-            <dialog id="my_modal_2" className="modal">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg">Alert</h3>
-                    <div className="ml-5">
-                        <p className="mt-5">
-                            Are you sure you want to delete &quot;title&quot;?</p>
-                    </div>
-                    <div className="modal-action">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-outline btn-accent btn-xs">CANCEL</button>
-                        </form>
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-outline btn-secondary btn-xs">DELETE</button>
-                        </form>
-                    </div>
-                </div>
-            </dialog>
-        </>
-    )
-}
-
-const Sort= () => {
-    return (
-        <div className="dropdown dropdown-bottom dropdown-end">
-            <label tabIndex={0} className="btn btn-outline btn-xs me-4 mb-4">Sort</label>
-            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-info-content rounded-box w-52">
-                <li><a>Added order</a></li>
-                <li><a>Update order</a></li>
-            </ul>
-        </div>
-        )
-    }
-
-const Reload = () => {
-    return (
-        <div>
-            <label className="btn btn-outline btn-xs me-4 mb-4">RELOAD</label>
-        </div>
-    )
-}
+const m1_selector_placeholder = ["tag1", "tag2", "tag3"];
 
 const NavBar = () => {
 
     const [completed,setCompleted] = useState(false);
     const [btnColor, setBtnColor] = useState("btn-success");
-    const [todoList, setTodoList] = useState([]);
-
-    // front用のflag処理
-    useEffect(() => {
-        if (completed) {
-            setBtnColor("btn-error");
-        } else {
-            setBtnColor("btn-success");
-        }
-    }, [completed])
+    const [todoList, setTodoList] = useState<Todo[]>([]);
 
     // front用の全件取得処理
     useEffect(() => {
@@ -118,11 +30,19 @@ const NavBar = () => {
     }, [])
 
     const getTodoList = () => {
-        fetch("http://localhost:8000/todos")
+        // fetch("http://localhost:8000/todos")
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         setTodoList(data);
+        //     })
+        //     .catch(error => console.error(error));
+
+        fetch("/api/mock")
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-                setTodoList(data)
+                console.log(data);
+                setTodoList(data);
             })
             .catch(error => console.error(error));
     }
@@ -167,8 +87,8 @@ const NavBar = () => {
                         </div>
                         <div className="divider"></div>
                         <div className="flex justify-end"><div onClick={getTodoList}><Reload /></div><Sort /></div>
-                        <div className="flex justify-center">
-                            <div className="card w-11/12 bg-base-100 shadow-xl bg-indigo-800">
+                        <div className="flex flex-col items-center justify-center">
+                            {/* <div className="card w-11/12 bg-base-100 shadow-xl bg-indigo-800">
                                 <div className="card-body">
                                     <div className="flex justify-between">
                                         <h2 className="card-title line-clamp-1">Todo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo TitleTodo Title</h2>
@@ -193,10 +113,16 @@ const NavBar = () => {
                                         }} className="w-6 h-6 text-right hover:text-red-700" />
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
+                            {/* <TodoCard title="test" owner="test" tag={["tag1","tag2","tag3"]} created="2023/10/25" updated="2023/10/25" propBtnColor={btnColor} propCompleted={completed} /> */}
+                            {
+                                todoList.map((todo, index) => {
+                                    return <TodoCard key={index} title={todo.title} owner={todo.user} tag={todo.tag} created={todo.created} updated={todo.updated} propBtnColor={btnColor} propCompleted={todo.completed} />
+                                })
+                            }
                         </div>
                     </div>
-                    <Modal />
+                    <Modal title="Select Tag" placeholder={m1_selector_placeholder} />
                     <Modal2 />
                 </div>
                 <div className="drawer-side">
@@ -209,7 +135,7 @@ const NavBar = () => {
                                 modal.showModal();
                             }
                         }}><a>Add Todo</a></li>
-                        <li onClick={() => { console.log('Hallo!') }}><a>Add Tag</a></li>
+                        {/* <li onClick={() => { console.log('Hallo!') }}><a>Add Tag</a></li> */}
                         {/* <li><a>Sidebar Item 2</a></li> */}
                     </ul>
                 </div>
