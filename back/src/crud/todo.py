@@ -7,12 +7,13 @@ from schemas.schema import CreateTodoSchema, UpdateTodoSchema
 from .tag import get_by_id as get_tag_by_id, get_by_name
 
 
-def create(db: Session, create_todo_schema: CreateTodoSchema) -> TodoModel:
+def create(db: Session, create_todo_schema: CreateTodoSchema):
     todo_model = TodoModel(**create_todo_schema.model_dump(exclude_unset=True))
     db.add(todo_model)
     db.commit()
-    db.refresh(todo_model)
-    return todo_model
+    return
+    # db.refresh(todo_model)
+    # return todo_model
 
 
 def get_by_id(db: Session, todo_id: int) -> TodoModel | None:

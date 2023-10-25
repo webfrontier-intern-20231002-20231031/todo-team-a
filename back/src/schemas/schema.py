@@ -13,8 +13,8 @@ class TagSchemaBase(BaseModel):
 
 
 class TodoTagSchema(TagSchemaBase):
-    id: int | None = None
-    name: str | None = None
+    id: int | None = None               # ここの値がある場合は、既にあるタグを割り振っている
+    name: str | None = None             # ここの値がある場合は、新規でタグを作成する必要がある
 
 
 class TagTodoSchema(TodoSchemaBase):
@@ -27,7 +27,7 @@ class TodoSchema(TagTodoSchema):
 
 
 class CreateTodoSchema(TodoSchemaBase):
-    content: str
+    title: str
     tags: list[TodoTagSchema] | None = []
 
 

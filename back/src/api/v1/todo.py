@@ -26,10 +26,11 @@ def read_by_id(todo_id: int, db: Session = Depends(database.get_db)):
     return TodoSchema.model_validate(todo_model)
 
 
+# 現状todo単体の作成になっている (tag情報を送られても作成はしない)
 @router.post("/", response_model=TodoSchema)
 def create(todo_schema: CreateTodoSchema, db: Session = Depends(database.get_db)):
-    todo_model = todo.create(db, todo_schema)
-    return TodoSchema.model_validate(todo_model)
+    todo.create(db, todo_schema)
+    return Response(status_code=status.HTTP_200_OK)
 
 
 @router.put("/{todo_id}")
