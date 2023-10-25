@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return new Response(null, { status: 400, statusText: "Must be DELETE method" });
     }
 
-    await fetch("https://jsonplaceholder.typicode.com/todos/1", {
+    await fetch("http://localhost:8000/todo/deleted", {
         method: 'DELETE',
         body: JSON.stringify(req.body),
         headers: {

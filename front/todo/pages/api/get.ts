@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return new Response(null, { status: 400, statusText: "Must be GET method" });
     }
 
-    await fetch("https://jsonplaceholder.typicode.com/todos/1", {
+    await fetch("http://localhost:8000/todo/", {
         method: 'GET',
         body: JSON.stringify(req.body),
         headers: {
@@ -22,20 +22,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.end();
 }
-
-// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-
-//   if (req.method !== "GET") {
-//       return new Response(null, { status: 400, statusText: "Must be GET method" });
-//   }
-
-//   await fetch("localhost:8000/")
-//     .then(res => res.json())
-//     .then(json => {
-//       console.log(json);
-//       res.status(200).json(json);
-//     })
-//     .catch(e => { console.error(e.message); });
-
-//   res.end();
-// }
