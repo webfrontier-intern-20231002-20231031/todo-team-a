@@ -1,7 +1,7 @@
 const Reload = () => {
     return (
         <div>
-            <label className="btn btn-outline btn-xs me-4 mb-4">RELOAD</label>
+            <label className="btn btn-outline btn-info btn-xs me-4 mb-4">RELOAD</label>
         </div>
     )
 }
