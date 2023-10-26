@@ -13,7 +13,7 @@ def create(db: Session, create_update_tag_schema: CreateUpdateTagSchema) -> TagM
 
 
 def get_by_id(db: Session, tag_model_id: int) -> TagModel | None:
-    return db.query(TagModel).filter(TagModel.id == tag_model_id).first()
+    return db.query(TagModel).filter(TagModel.tag_id == tag_model_id).first()
 
 
 def get_by_name(db: Session, name: str) -> TagModel | None:

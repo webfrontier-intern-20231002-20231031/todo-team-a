@@ -4,7 +4,9 @@ from pydantic import BaseModel, ConfigDict
 
 class TodoSchemaBase(BaseModel):
     completed: bool | None = None
-    deadline: datetime | None = None
+    deleted: bool | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -13,13 +15,13 @@ class TagSchemaBase(BaseModel):
 
 
 class TodoTagSchema(TagSchemaBase):
-    id: int | None = None               # ここの値がある場合は、既にあるタグを割り振っている
+    tag_id: int | None = None               # ここの値がある場合は、既にあるタグを割り振っている
     name: str | None = None             # ここの値がある場合は、新規でタグを作成する必要がある
 
 
 class TagTodoSchema(TodoSchemaBase):
-    id: int
-    content: str
+    todo_id: int
+    title: str
 
 
 class TodoSchema(TagTodoSchema):
@@ -32,7 +34,7 @@ class CreateTodoSchema(TodoSchemaBase):
 
 
 class UpdateTodoSchema(TodoSchemaBase):
-    content: str | None = None
+    title: str | None = None
     tags: list[TodoTagSchema] | None = []
 
 
