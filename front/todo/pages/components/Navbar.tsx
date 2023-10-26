@@ -196,8 +196,11 @@ const NavBar = () => {
                             </div> */}
                             {/* <TodoCard title="test" owner="test" tag={["tag1","tag2","tag3"]} created="2023/10/25" updated="2023/10/25" propBtnColor={btnColor} propCompleted={completed} /> */}
                             {
-                                todoList.map((todo, index) => {
-                                    return <TodoCard key={index} title={todo.title} owner={todo.user} tag={todo.tag} created={todo.created} updated={todo.updated} propBtnColor={btnColor} propCompleted={todo.completed} />
+                                // todoList.map((todo, index) => {
+                                //     return <TodoCard key={index} title={todo.title} owner={todo.user} tag={todo.tag} created={todo.created} updated={todo.updated} propBtnColor={btnColor} propCompleted={todo.completed} />
+                                // })
+                                fastTodoList.map((todo, index) => {
+                                    return <TodoCard key={index} title={todo.title} owner={todo.tags[0].name} tag={todo.tags.map((tag) => tag.name)} created={todo.created_at} updated={todo.updated_at} propBtnColor={btnColor} propCompleted={todo.completed} />
                                 })
                             }
                         </div>
