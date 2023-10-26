@@ -17,6 +17,21 @@ interface Todo {
     updated: string;
 }
 
+interface fastTodo {
+    todo_id: number;
+    title: string;
+    tags: Tag[];
+    completed: boolean;
+    deleted: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
+interface Tag {
+    tag_id: number;
+    name: string;
+}
+
 const m1_selector_placeholder = ["tag1", "tag2", "tag3"];
 
 const NavBar = () => {
@@ -24,6 +39,9 @@ const NavBar = () => {
     // const [completed,setCompleted] = useState(false);
     const [btnColor, setBtnColor] = useState("btn-success");
     const [todoList, setTodoList] = useState<Todo[]>([]);
+
+    // 通信テスト用
+    const [fastTodoList, setFastTodoList] = useState<fastTodo[]>([]);
 
     const [sortNum, setSortNum] = useState(0);
 
@@ -76,23 +94,26 @@ const NavBar = () => {
     }, [])
 
     const getTodoList = () => {
-        // fetch("http://localhost:8000/todos")
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         setTodoList(data);
-        //     })
-        //     .catch(error => console.error(error));
 
-        fetch("/api/mock")
+        // 通信テスト用
+        fetch("/api/fastapiget")
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // const sortData = data.sort(todoCreatedSort);
-                const sortData = todoSort(data, sortNum);
-                setTodoList(data);
+                setFastTodoList(data);
+                console.log(fastTodoList);
             })
             .catch(error => console.error(error));
+
+        // fetch("/api/mock")
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         // const sortData = data.sort(todoCreatedSort);
+        //         const sortData = todoSort(data, sortNum);
+        //         setTodoList(data);
+        //     })
+        //     .catch(error => console.error(error));
     }
 
     const checkTodo = () => {
