@@ -112,7 +112,7 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
                             {/* <TagSelector tagName="test" /> */}
                         <div className="h-24 overflow-y-auto">{
                             tagList.map((tag) => {
-                                return <label key={tag.tag_id} className="inline-block"><input type="checkbox" value={tag.name} className="checkbox checkbox-xs" onChange={handleCheckboxChange} /> {tag.name}　</label>
+                                return <label key={tag.tag_id} className="inline-block"><input type="checkbox" value={tag.tag_id} className="checkbox checkbox-xs" onChange={handleCheckboxChange} /> {tag.name}　</label>
                             }
                             )
                         }</div>

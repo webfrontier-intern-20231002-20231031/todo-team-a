@@ -118,7 +118,7 @@ const NavBar = () => {
         fetch("/api/ui/getTodo")
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 setFastTodoList(data);
                 console.log(fastTodoList);
             })
