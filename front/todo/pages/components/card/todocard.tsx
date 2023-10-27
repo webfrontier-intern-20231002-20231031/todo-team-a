@@ -4,6 +4,7 @@ import { TdesignDelete } from "../svg_button/deleteButton";
 import { useEffect, useState } from "react";
 
 type TodoCardProps = {
+    id: number
     title: string
     owner: string
     tag: string[]

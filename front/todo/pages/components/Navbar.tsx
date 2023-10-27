@@ -17,6 +17,22 @@ interface Todo {
     updated: string;
 }
 
+interface fastTodo {
+    todo_id: number;
+    title: string;
+    tags: Tag[];
+    completed: boolean;
+    deleted: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
+interface Tag {
+    tag_id: number;
+    name: string;
+}
+
+
 const m1_selector_placeholder = ["tag1", "tag2", "tag3"];
 
 const NavBar = () => {
@@ -24,6 +40,10 @@ const NavBar = () => {
     // const [completed,setCompleted] = useState(false);
     const [btnColor, setBtnColor] = useState("btn-success");
     const [todoList, setTodoList] = useState<Todo[]>([]);
+
+
+    // 通信テスト用
+    const [fastTodoList, setFastTodoList] = useState<fastTodo[]>([]);
 
     const [sortNum, setSortNum] = useState(0);
 
@@ -76,7 +96,7 @@ const NavBar = () => {
     }, [])
 
     const getTodoList = () => {
-        // fetch("http://localhost:8000/todos")
+        // fetch("api/addTodo/todo")
         //     .then(response => response.json())
         //     .then(data => {
         //         console.log(data);
@@ -84,13 +104,23 @@ const NavBar = () => {
         //     })
         //     .catch(error => console.error(error));
 
-        fetch("/api/mock")
+        // fetch("/api/ui/getTodo")
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         // const sortData = data.sort(todoCreatedSort);
+        //         // const sortData = todoSort(data, sortNum);
+        //         // setApiTodoList(data);
+        //     })
+        //     .catch(error => console.error(error));    
+
+        // 通信テスト用
+        fetch("/api/ui/getTodo")
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                // const sortData = data.sort(todoCreatedSort);
-                const sortData = todoSort(data, sortNum);
-                setTodoList(data);
+                // console.log(data);
+                setFastTodoList(data);
+                console.log(fastTodoList);
             })
             .catch(error => console.error(error));
     }
@@ -106,8 +136,8 @@ const NavBar = () => {
 
     useEffect(() => {
         console.log(sortNum);
-        const sortData = todoSort(todoList, sortNum);
-        setTodoList(todoList);
+        const sortData = todoSort(fastTodoList, sortNum);
+        setFastTodoList(fastTodoList);
     })
 
     return (
@@ -175,9 +205,13 @@ const NavBar = () => {
                             </div> */}
                             {/* <TodoCard title="test" owner="test" tag={["tag1","tag2","tag3"]} created="2023/10/25" updated="2023/10/25" propBtnColor={btnColor} propCompleted={completed} /> */}
                             {
-                                todoList.map((todo, index) => {
-                                    return <TodoCard key={index} title={todo.title} owner={todo.user} tag={todo.tag} created={todo.created} updated={todo.updated} propBtnColor={btnColor} propCompleted={todo.completed} />
-                                })
+                                // todoList.map((todo, index) => {
+                                //     return <TodoCard key={index} title={todo.title} owner={todo.user} tag={todo.tag} created={todo.created} updated={todo.updated} propBtnColor={btnColor} propCompleted={todo.completed} />
+                                // })
+                                fastTodoList.map((todo, index) => {
+                                    return <TodoCard key={index} title={todo.title} owner="FastAPI" tag={todo.tags.map((tag) => tag.name)} created={todo.created_at} updated={todo.updated_at} propBtnColor={btnColor} propCompleted={todo.completed} id={todo.todo_id} />
+                                }
+                                )
                             }
                         </div>
                     </div>
