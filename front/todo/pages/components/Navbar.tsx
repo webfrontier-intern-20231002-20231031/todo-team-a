@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { TdesignDelete } from "./svg_button/deleteButton";
+import { useRecoilState } from "recoil";
+import { todoListState } from "../atoms";
 import Modal from "./modal/modal1";
 import Modal2 from "./modal/modal2";
 import Reload from "./svg_button/reload";
@@ -41,6 +43,8 @@ const NavBar = () => {
     const [btnColor, setBtnColor] = useState("btn-success");
     const [todoList, setTodoList] = useState<Todo[]>([]);
 
+    // recoil用
+    const [todo_delId, setTodo_delId] = useRecoilState(todoListState);
 
     // 通信テスト用
     const [fastTodoList, setFastTodoList] = useState<fastTodo[]>([]);
@@ -135,7 +139,7 @@ const NavBar = () => {
     };
 
     useEffect(() => {
-        console.log(sortNum);
+        // console.log(sortNum);
         const sortData = todoSort(fastTodoList, sortNum);
         setFastTodoList(fastTodoList);
     })
@@ -209,20 +213,21 @@ const NavBar = () => {
                                 //     return <TodoCard key={index} title={todo.title} owner={todo.user} tag={todo.tag} created={todo.created} updated={todo.updated} propBtnColor={btnColor} propCompleted={todo.completed} />
                                 // })
                                 fastTodoList.map((todo, index) => {
-                                    return <TodoCard key={index} title={todo.title} owner="FastAPI" tag={todo.tags.map((tag) => tag.name)} created={todo.created_at} updated={todo.updated_at} propBtnColor={btnColor} propCompleted={todo.completed} id={todo.todo_id} />
+                                    return <TodoCard key={index} title={todo.title} owner="FastAPI" tag={todo.tags.map((tag) => tag.name)} created={todo.created_at} updated={todo.updated_at} propBtnColor={btnColor} propCompleted={todo.completed} todo_id={todo.todo_id} />
                                 }
                                 )
                             }
                         </div>
                     </div>
                     <Modal title="Select Tag" placeholder={m1_selector_placeholder} />
-                    <Modal2 />
+                    <Modal2 todo_id={todo_delId} />
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 min-h-full bg-base-200">
                         {/* Sidebar content here */}
                         <li className="mt-20" onClick={() => {
+
                             const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
                             if (modal) {
                                 modal.showModal();

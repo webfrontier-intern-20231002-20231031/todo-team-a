@@ -1,10 +1,15 @@
 import { type } from "os";
 import { TdesignDelete } from "../svg_button/deleteButton";
+import Modal2 from "../modal/modal2";
+
+
+import { useRecoilState } from "recoil";
+import { todoListState } from "../../atoms";
 
 import { useEffect, useState } from "react";
 
 type TodoCardProps = {
-    id: number
+    todo_id: number
     title: string
     owner: string
     tag: string[]
@@ -15,7 +20,7 @@ type TodoCardProps = {
     propCompleted: boolean
 }
 
-const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted }: TodoCardProps) => {
+const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted, todo_id }: TodoCardProps) => {
 
     const [completed, setCompleted] = useState(propCompleted);
     const [btnColor, setBtnColor] = useState(propBtnColor);
@@ -23,6 +28,9 @@ const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted
     useEffect(() => { setBtnColor(propBtnColor) }, [propBtnColor])
     useEffect(() => { setCompleted(propCompleted) }, [propCompleted])
 
+
+    // recoil用
+    const [todo_delId, setTodo_delId] = useRecoilState(todoListState);
 
     // front用のflag処理
     useEffect(() => {
@@ -56,6 +64,8 @@ const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted
                 </div>
                 <div className="flex justify-end">
                     <TdesignDelete onClick={() => {
+                        console.log(todo_id);
+                        setTodo_delId(todo_id.toString());
                         const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
                         if (modal) {
                             modal.showModal();

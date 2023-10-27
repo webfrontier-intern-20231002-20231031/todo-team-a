@@ -9,8 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await fetch("http://127.0.0.1:8000/v1/tag/")
         .then(res => res.json())
         .then(json => {
-            console.log(json);
-            console.log(json[0].tags);
+            // console.log(json);
+            // console.log(json[0].tags);
             res.status(200).json(json);
         })
         .catch(e => { console.error(e.message); });
