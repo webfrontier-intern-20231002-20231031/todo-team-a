@@ -136,8 +136,8 @@ const NavBar = () => {
 
     useEffect(() => {
         console.log(sortNum);
-        const sortData = todoSort(todoList, sortNum);
-        setTodoList(todoList);
+        const sortData = todoSort(fastTodoList, sortNum);
+        setFastTodoList(fastTodoList);
     })
 
     return (
@@ -209,7 +209,7 @@ const NavBar = () => {
                                 //     return <TodoCard key={index} title={todo.title} owner={todo.user} tag={todo.tag} created={todo.created} updated={todo.updated} propBtnColor={btnColor} propCompleted={todo.completed} />
                                 // })
                                 fastTodoList.map((todo, index) => {
-                                    return <TodoCard key={index} title={todo.title} owner="FastAPI" tag={todo.tags.map((tag) => tag.name)} created={todo.created_at} updated={todo.updated_at} propBtnColor={btnColor} propCompleted={todo.completed} />
+                                    return <TodoCard key={index} title={todo.title} owner="FastAPI" tag={todo.tags.map((tag) => tag.name)} created={todo.created_at} updated={todo.updated_at} propBtnColor={btnColor} propCompleted={todo.completed} id={todo.todo_id} />
                                 }
                                 )
                             }
