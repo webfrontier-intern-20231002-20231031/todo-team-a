@@ -25,6 +25,8 @@ const NavBar = () => {
     const [btnColor, setBtnColor] = useState("btn-success");
     const [todoList, setTodoList] = useState<Todo[]>([]);
 
+    const [apiTodoList, setApiTodoList] = useState<Todo[]>([]);
+
     const [sortNum, setSortNum] = useState(0);
 
     const todoCreatedSort = (a: Todo, b: Todo, f: number) => {
@@ -76,7 +78,7 @@ const NavBar = () => {
     }, [])
 
     const getTodoList = () => {
-        // fetch("http://localhost:8000/todos")
+        // fetch("api/addTodo/todo")
         //     .then(response => response.json())
         //     .then(data => {
         //         console.log(data);
@@ -84,13 +86,13 @@ const NavBar = () => {
         //     })
         //     .catch(error => console.error(error));
 
-        fetch("/api/mock")
+        fetch("/api/ui/getTodo")
             .then(response => response.json())
             .then(data => {
                 console.log(data);
                 // const sortData = data.sort(todoCreatedSort);
-                const sortData = todoSort(data, sortNum);
-                setTodoList(data);
+                // const sortData = todoSort(data, sortNum);
+                // setApiTodoList(data);
             })
             .catch(error => console.error(error));
     }
