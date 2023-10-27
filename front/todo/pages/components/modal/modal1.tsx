@@ -36,7 +36,14 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
 
         const { title, tag, newTag } = formData;
 
-        fetch('api/mockpost', {
+        // fetch('api/mockpost', {
+        //     method: 'POST',
+        //     body: JSON.stringify({ title, tag, newTag }),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        // })
+        fetch('api/todoCrud/todo',{
             method: 'POST',
             body: JSON.stringify({ title, tag, newTag }),
             headers: {

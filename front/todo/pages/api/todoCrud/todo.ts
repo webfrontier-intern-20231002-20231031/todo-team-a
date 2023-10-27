@@ -6,14 +6,7 @@ type Data = {
     name: string
 }
 
-export default function handler(
-    req: NextApiRequest,
-    res: NextApiResponse
-) {
-    if (req.method !== "POST") {
-        return res.status(405).json({ message: "Method not allowed" });
-    }
-
+function addTodo(title: string) {
     fetch('http://127.0.0.1:8000/v1/todo/', {
         method: 'POST',
         headers: {
@@ -21,7 +14,7 @@ export default function handler(
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            title: 'avocado'
+            title: title
         })
     })
         .then(response => response.json())
@@ -31,4 +24,19 @@ export default function handler(
         .catch(error => {
             console.error('Error:', error);
         });
+}
+
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse
+) {
+    if (req.method !== "POST") {
+        return res.status(405).json({ message: "Method not allowed" });
+    }
+
+    console.log(req.body);
+
+    const { title } = req.body;
+
+    await addTodo(title);
 }
