@@ -1,22 +1,19 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { Ewert } from 'next/font/google';
+import type { NextApiRequest, NextApiResponse } from "next";
 
-type Data = {
-    name: string
-}
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-export default function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<Data>
-) {
-    fetch("http://localhost:8000/v1/todo/",{
-        method: 'GET',
+    if (req.method !== "GET") {
+        return new Response(null, { status: 400, statusText: "Must be GET method" });
+    }
+
+    await fetch("http://127.0.0.1:8000/v1/todo/")
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+            console.log(json[0].tags);
+            res.status(200).json(json);
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            res.status(200).json(data);
-        })
-        .catch(error => console.error(error));
+        .catch(e => { console.error(e.message); });
+
+    res.end();
 }
