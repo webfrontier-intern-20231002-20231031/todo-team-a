@@ -34,9 +34,10 @@ def update(
     for key, value in update_todo_schema_obj.items():
         if key == "tags":
             for tag in value:
-                if "id" in tag:
-                    tag_model = get_tag_by_id(db, tag["id"])
+                if "tag_id" in tag:
+                    tag_model = get_tag_by_id(db, tag["tag_id"])
                     update_tags.append(tag_model)
+                    print("request : ", tag)
                 elif "name" in tag:
                     tag_model = get_by_name(db, tag["name"])
                     if tag_model is None:                                               # 同じtagが登録されていなかった場合
