@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import InputFormText from './InputFormText';
 import SubmitFormBtn from './SubmitFormBtn';
+import { useRouter } from 'next/router';
 
 
 const LoginFream = () => {
@@ -13,6 +14,9 @@ const LoginFream = () => {
 
     const [loginBtn, setLoginBtn] = useState('btn btn-active w-44');
     const [registerBtn, setRegisterBtn] = useState('btn w-44');
+
+
+    const router = useRouter();
 
     const onClickLoginBtn = () => {
         setRegisterBtn('btn w-44');
@@ -40,6 +44,8 @@ const LoginFream = () => {
         setLogin(getCompleted);
         console.log(userId);
         console.log(password);
+
+        router.push('/todo');
     }
 
     return (

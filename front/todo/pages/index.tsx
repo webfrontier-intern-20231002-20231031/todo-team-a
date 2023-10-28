@@ -10,7 +10,8 @@ export default function Home() {
     <>
       {/* <LoginPage /> */}
       <RecoilRoot>
-        <NavBar />
+        {/* <NavBar /> */}
+        <LoginPage />
       </RecoilRoot>
     </>
   )
