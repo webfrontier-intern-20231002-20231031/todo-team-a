@@ -33,6 +33,20 @@ const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted
     // recoil用
     const [todo_delId, setTodo_delId] = useRecoilState(todoListState);
 
+    // 時間のformat
+    const formatTime = (time: string) => {
+        const createdDate = new Date(time);
+        const year = createdDate.getFullYear().toString().slice(-2);
+        const createdFormatted = createdDate.toLocaleString("ja-JP", {
+            timeZone: "Asia/Tokyo",
+            year: "2-digit",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+        return createdFormatted;
+    }
 
     const todoCompleted = () => {
 
@@ -73,16 +87,16 @@ const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted
                 </div>
                 <div className="flex">
                     <div>
-                        <p>Owner: {owner}</p>
-                        <p>Tag:
+                        <p>作成者: {owner}</p>
+                        <p>タグ:
                             {tag.map((tag, index) => {
                                 return <span key={index}> {tag}</span>
                             })}
                         </p>
                     </div>
                     <div className="ml-10">
-                        <p>Created: {created}</p>
-                        <p>Updated: {updated}</p>
+                        <div><p className="inline-block">作成日: {formatTime(created)}</p></div>
+                        <p className="inline-block">更新日: {formatTime(updated)}</p>
                     </div>
                 </div>
                 <div className="flex justify-end">

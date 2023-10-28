@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { TdesignDelete } from "./svg_button/deleteButton";
 import { useRecoilState } from "recoil";
-import { todoListState } from "../atoms";
+import { todoListState, loadingState } from "../atoms";
 import Modal from "./modal/modal1";
 import Modal2 from "./modal/modal2";
 import Reload from "./svg_button/reload";
@@ -38,6 +38,9 @@ interface Tag {
 const m1_selector_placeholder = ["tag1", "tag2", "tag3"];
 
 const NavBar = () => {
+
+    // ローディング用
+    const [loading, setLoading] = useRecoilState(loadingState);
 
     // const [completed,setCompleted] = useState(false);
     const [btnColor, setBtnColor] = useState("btn-success");
@@ -221,6 +224,7 @@ const NavBar = () => {
                     </div>
                     <Modal title="Select Tag" placeholder={m1_selector_placeholder} />
                     <Modal2 />
+                    { loading ? <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div> : null}
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>

@@ -1,6 +1,8 @@
 import Selector from "../form/selector";
 import { use, useEffect, useState } from "react";
 import TagSelector from "../form/checobox";
+import { useRecoilState } from "recoil";
+import { todoListState, loadingState } from "../../atoms";
 
 type ModalSelectorProps = {
     title: string
@@ -24,6 +26,8 @@ type FormData = {
 }
 
 const Modal = ({title, placeholder}: ModalSelectorProps) => {
+
+    const [loading, setLoading] = useRecoilState(loadingState);
 
     const [tagList, setTagList] = useState<tagList[]>([]);
 
@@ -69,6 +73,9 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
         //         'Content-Type': 'application/json'
         //     },
         // })
+
+        setLoading(true);
+
         fetch('api/todoCrud/todo',{
             method: 'POST',
             body: JSON.stringify({ title, checkedTags, newTag }),
@@ -81,9 +88,18 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
         })
         .then((data) => {
             console.log(data);
+            const modal = document.getElementById(
+                "my_modal_1"
+            ) as HTMLDialogElement;
+            if (modal) {
+                modal.close();
+            }
         })
         .catch((err) => {
             console.log(err);
+        })
+        .finally(() => {
+            setLoading(false);
         })
     };
 
