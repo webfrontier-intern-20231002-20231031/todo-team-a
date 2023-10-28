@@ -88,11 +88,13 @@ const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted
                 <div className="flex">
                     <div>
                         <p>作成者: {owner}</p>
-                        <p>タグ:
+                        {/* <p>タグ:
                             {tag.map((tag, index) => {
-                                return <span key={index}> {tag}</span>
+                                console.log(title,tag);
+                                return tag !== null ? <span key={index}> {tag}</span> : <span key={index}>none</span>
                             })}
-                        </p>
+                        </p> */}
+                        <p>Tag: {tag.length === 0 ? "none" : tag.join(", ")}</p>
                     </div>
                     <div className="ml-10">
                         <div><p className="inline-block">作成日: {formatTime(created)}</p></div>

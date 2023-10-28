@@ -9,3 +9,8 @@ export const loadingState = atom({
     key: "loadingState",
     default: false,
 });
+
+export const updateFlagState = atom({
+    key: "updateFlagState",
+    default: false,
+});
