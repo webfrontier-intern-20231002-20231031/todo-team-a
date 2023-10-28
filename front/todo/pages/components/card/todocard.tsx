@@ -7,6 +7,7 @@ import { useRecoilState } from "recoil";
 import { todoListState } from "../../atoms";
 
 import { useEffect, useState } from "react";
+import { todo } from "node:test";
 
 type TodoCardProps = {
     todo_id: number
@@ -32,6 +33,28 @@ const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted
     // recoil用
     const [todo_delId, setTodo_delId] = useRecoilState(todoListState);
 
+
+    const todoCompleted = () => {
+
+        fetch("/api/todoCrud/completed/", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: todo_id.toString(), completed: !completed }),
+        })
+            .then((res) => {
+                if (res.ok) {
+                    console.log("deleted");
+                } else {
+                    console.log("delete failed");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
     // front用のflag処理
     useEffect(() => {
         if (completed) {
@@ -46,7 +69,7 @@ const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted
             <div className="card-body">
                 <div className="flex justify-between">
                     <h2 className="card-title line-clamp-1">{title}</h2>
-                    <button className={"btn btn-outline btn-xs " + btnColor} onClick={() => { setCompleted(!completed); setBtnColor(completed ? "btn-error" : "btn-success") }}>{completed ? "COMPLETE" : "INCOMPLETE"}</button>
+                    <button className={"btn btn-outline btn-xs " + btnColor} onClick={() => { todoCompleted(); setCompleted(!completed); setBtnColor(completed ? "btn-error" : "btn-success") }}>{completed ? "COMPLETE" : "INCOMPLETE"}</button>
                 </div>
                 <div className="flex">
                     <div>

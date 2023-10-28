@@ -220,7 +220,7 @@ const NavBar = () => {
                         </div>
                     </div>
                     <Modal title="Select Tag" placeholder={m1_selector_placeholder} />
-                    <Modal2 todo_id={todo_delId} />
+                    <Modal2 />
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
