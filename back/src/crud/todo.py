@@ -20,7 +20,8 @@ def get_by_id(db: Session, todo_id: int) -> TodoModel | None:
 
 
 def get(db: Session, skip: int = 0, limit: int = 100) -> list[TodoModel]:
-    return db.query(TodoModel).offset(skip).limit(limit).all()
+    # deletednがFalseのものだけ取得する
+    return db.query(TodoModel).filter(TodoModel.deleted == False).offset(skip).limit(limit).all()
 
 
 def update(

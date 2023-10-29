@@ -40,7 +40,7 @@ function addTag(oldTag: string[],neWtag: string, id: string) {
         name = neWtag.split(/[ ,]+/);
     }
 
-    console.log('tags:',name);
+    // console.log('tags:',name);
 
     const data = {
         "updated_at": Date.now().toString(),
@@ -54,7 +54,7 @@ function addTag(oldTag: string[],neWtag: string, id: string) {
         ]
     };
 
-    console.log('data:',JSON.stringify(data));
+    // console.log('data:',JSON.stringify(data));
 
     fetch('http://127.0.0.1:8000/v1/todo/'+id, {
         method: 'PUT',
@@ -63,6 +63,8 @@ function addTag(oldTag: string[],neWtag: string, id: string) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
+    }).catch(error => {
+        console.error('Error:', error);
     });
     }
 
@@ -75,14 +77,15 @@ export default async function handler(
         return res.status(405).json({ message: "Method not allowed" });
     }
 
-    console.log(req.body);
+    // console.log(req.body);
 
     const { title, checkedTags, newTag } = req.body;
 
-    console.log('oldTag:',checkedTags);
+    // console.log('oldTag:',checkedTags);
 
     var id = await addTodo(title)
     await addTag(checkedTags,newTag,id);
     await addTag(checkedTags,newTag,id);
-    await console.log('id:',id);
+    // await console.log('id:',id);
+    res.status(200).json({ message: "ok" });
 }

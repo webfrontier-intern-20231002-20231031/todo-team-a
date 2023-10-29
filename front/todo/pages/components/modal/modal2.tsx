@@ -1,4 +1,36 @@
+import { useEffect, useState } from "react";
+
+import { useRecoilState } from "recoil";
+import { todoListState } from "../../atoms";
+import { todo } from "node:test";
+
 const Modal2 = () => {
+
+    // recoil用
+    const [todo_delId, setTodo_delId] = useRecoilState(todoListState);
+
+    const todoDeleted = () => {
+
+
+        fetch("/api/todoCrud/delete/",{
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({id: todo_delId}),
+        })
+            .then((res) => {
+                if (res.ok) {
+                    console.log("deleted");
+                } else {
+                    console.log("delete failed");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
     return (
         <>
             {/* modal body */}
@@ -16,7 +48,7 @@ const Modal2 = () => {
                         </form>
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-outline btn-secondary btn-xs">DELETE</button>
+                            <button className="btn btn-outline btn-secondary btn-xs" onClick={()=>todoDeleted()}>DELETE</button>
                         </form>
                     </div>
                 </div>
