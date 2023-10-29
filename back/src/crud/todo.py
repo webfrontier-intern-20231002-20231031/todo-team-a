@@ -16,7 +16,7 @@ def create(db: Session, create_todo_schema: CreateTodoSchema):
 
 
 def get_by_id(db: Session, todo_id: int) -> TodoModel | None:
-    return db.query(TodoModel).filter(TodoModel.todo_id == todo_id).first()
+    return db.query(TodoModel).filter(TodoModel.deleted == False).filter(TodoModel.todo_id == todo_id).first()
 
 
 def get(db: Session, skip: int = 0, limit: int = 100) -> list[TodoModel]:

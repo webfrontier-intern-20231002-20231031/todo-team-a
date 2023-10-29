@@ -13,15 +13,17 @@ def create(db: Session, create_update_tag_schema: CreateUpdateTagSchema) -> TagM
 
 
 def get_by_id(db: Session, tag_model_id: int) -> TagModel | None:
-    return db.query(TagModel).filter(TagModel.tag_id == tag_model_id).first()
+    return db.query(TagModel).filter(TagModel.deleted == False).filter(TagModel.tag_id == tag_model_id).first()
 
 
 def get_by_name(db: Session, name: str) -> TagModel | None:
-    return db.query(TagModel).filter(TagModel.name == name).first()
+    # 一度論理削除された同じnameのtagも、これで再作成できるようになる
+    # 同じnameであるなら、[true -> false]に変更の方がいいかもしれない
+    return db.query(TagModel).filter(TagModel.deleted == False).filter(TagModel.name == name).first()
 
 
 def get(db: Session, skip: int = 0, limit: int = 100) -> list[TagModel]:
-    return db.query(TagModel).offset(skip).limit(limit).all()
+    return db.query(TagModel).filter(TagModel.deleted == False).offset(skip).limit(limit).all()
 
 
 def update(db: Session, tag_model_id: int, create_update_tag_schema: CreateUpdateTagSchema) -> TagModel:
