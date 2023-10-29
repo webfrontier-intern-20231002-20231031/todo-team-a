@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     //     return new Response(null, { status: 400, statusText: "Must be GET method" });
     // }
     if(req.method==='GET'){
-        await fetch("http://localhost:8000/todo/")
+        await fetch("http://localhost:8000/v1/todo")
         .then(res => res.json())
         .then(json => {
           console.log(json);
