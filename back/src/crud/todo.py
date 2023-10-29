@@ -64,6 +64,6 @@ def delete(db: Session, todo_model_id: int) -> int | None:
     todo_model = db.query(TodoModel).get(todo_model_id)
     if todo_model is None:
         return None
-    db.delete(todo_model)
+    todo_model.deleted = True
     db.commit()
     return todo_model_id

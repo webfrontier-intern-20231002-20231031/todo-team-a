@@ -39,6 +39,6 @@ def delete(db: Session, tag_model_id: int) -> int | None:
     tag_model = db.query(TagModel).get(tag_model_id)
     if tag_model is None:
         return None
-    db.delete(tag_model)
+    tag_model.deleted = True
     db.commit()
     return tag_model_id
