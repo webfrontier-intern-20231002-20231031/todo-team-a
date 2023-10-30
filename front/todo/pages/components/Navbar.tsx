@@ -2,7 +2,7 @@ import { use, useState } from "react";
 import { useEffect } from "react";
 import { TdesignDelete } from "./svg_button/deleteButton";
 import { useRecoilState } from "recoil";
-import { todoListState, loadingState, updateFlagState, deleteFlagState } from "../atoms";
+import { todoListState, loadingState, updateFlagState, deleteFlagState, userDataState } from "../atoms";
 import Modal from "./modal/modal1";
 import Modal2 from "./modal/modal2";
 import Reload from "./svg_button/reload";
@@ -64,6 +64,7 @@ const NavBar = () => {
     const [todo_delId, setTodo_delId] = useRecoilState(todoListState);
     const [updateFlag, setUpdateFlag] = useRecoilState(updateFlagState);
     const [deleteFlag, setDeleteFlag] = useRecoilState(deleteFlagState);
+    const [userData, setUserData] = useRecoilState(userDataState);
 
     // 通信テスト用
     const [fastTodoList, setFastTodoList] = useState<fastTodo[]>([]);
@@ -150,6 +151,8 @@ const NavBar = () => {
             setFirst(false);
             console.log("first");
         }
+
+        console.log(userData);
      }, [first])
 
      useEffect(() => {

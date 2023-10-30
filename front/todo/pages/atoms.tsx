@@ -1,5 +1,11 @@
 import { atom } from "recoil";
 
+
+export interface user {
+    id: number;
+    name: string;
+}
+
 export const todoListState = atom({
     key: "todoListState",
     default: "",
@@ -18,4 +24,9 @@ export const updateFlagState = atom({
 export const deleteFlagState = atom({
     key: "deleteFlagState",
     default: true,
+});
+
+export const userDataState = atom<user[]>({
+    key: 'userDataState',
+    default: [],
 });

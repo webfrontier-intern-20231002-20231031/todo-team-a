@@ -8,6 +8,7 @@ from schemas.schema import UserSchemaBase
 
 # ヒロセさんのモジュール
 from models.user import UserModel
+from pydantic import BaseModel
 
 router = APIRouter()
 
@@ -20,7 +21,13 @@ def create(user_schema: UserSchemaBase, db: Session = Depends(database.get_db)):
     return
 
 # ヒロセさんのコード
-@router.post("/login")
+
+
+class LoginResponse(BaseModel):
+    id: int
+    name : str
+
+@router.post("/login", response_model=LoginResponse)
 def read(user_schema: UserSchemaBase, db: Session = Depends(database.get_db)):
     user_account = db.query(UserModel).filter(and_(UserModel.email == user_schema.email, UserModel.password == user_schema.password)).first()
 
@@ -29,4 +36,4 @@ def read(user_schema: UserSchemaBase, db: Session = Depends(database.get_db)):
     if not user_account:                                                                        # 登録されてない場合
         raise HTTPException(status_code=401, detail="Email or password is incorrect")
 
-    return {"id": id}
+    return {"id": user_account.user_id, "name": user_account.user_name}

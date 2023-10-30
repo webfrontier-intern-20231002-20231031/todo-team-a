@@ -1,18 +1,31 @@
 import { Inter } from 'next/font/google'
 import LoginPage from './loginpage'
 import NavBar from './components/Navbar'
-import { RecoilRoot } from 'recoil'
+import { RecoilRoot, useRecoilState } from 'recoil'
+import { userDataState } from './atoms'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
   return (
     <>
       {/* <LoginPage /> */}
       <RecoilRoot>
-        {/* <NavBar /> */}
-        <LoginPage />
+        <App />
       </RecoilRoot>
+    </>
+  )
+}
+
+function App() {
+  const [data, setData] = useRecoilState(userDataState)
+
+  return (
+    <>
+      {
+        data ? <LoginPage /> : <NavBar />
+      }
     </>
   )
 }
