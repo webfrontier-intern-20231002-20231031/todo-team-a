@@ -12,11 +12,13 @@ type ModalSelectorProps = {
 interface tagList {
     tag_id: number
     name: string
+    checked: boolean
 }
 
 type Tag = {
-    tag_id: number,
+    tag_id: number
     name: string
+    checked: boolean
 }
 
 type FormData = {
@@ -34,6 +36,12 @@ const alert = ()=>{
     );
 }
 
+const initialFormData: FormData = {
+    title: "",
+    tagList: [],
+    newTag: "",
+};
+
 const Modal = ({title, placeholder}: ModalSelectorProps) => {
 
     const [loading, setLoading] = useRecoilState(loadingState);
@@ -41,15 +49,13 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
 
     const [showAlert, setShowAlert] = useState<boolean>(false);
 
-    const [tagList, setTagList] = useState<tagList[]>([]);
+    const [tagList1, setTagList] = useState<tagList[]>([]);
 
-    const [formData, setFormData] = useState<FormData>({
-        title: "",
-        tagList: [],
-        newTag: "",
-    });
+    const [formData, setFormData] = useState<FormData>(initialFormData);
 
     const [checkedTags, setCheckedTags] = useState<string[]>([]);
+
+    const [tagFlag, setTagFlag] = useState<boolean>(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
@@ -95,7 +101,7 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
 
         fetch('api/todoCrud/todo',{
             method: 'POST',
-            body: JSON.stringify({ title, checkedTags, newTag: newTag === "" ? "none" : newTag, }),
+            body: JSON.stringify({ title: formData.title, checkedTags, newTag: newTag === "" ? "none" : newTag, }),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -105,31 +111,51 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
         })
         .then((data) => {
             console.log(data);
-            const modal = document.getElementById(
-                "my_modal_1"
-            ) as HTMLDialogElement;
-            if (modal) {
-                modal.close();
-            }
-            setUpdateFlag(true);
         })
         .catch((err) => {
             console.log(err);
         })
         .finally(() => {
+
+            setFormData(initialFormData);
+            // setTagList((prevTagList) =>
+            //     prevTagList.map((tag) => ({ ...tag, checked: false }))
+            // );
+
+            const modal = document.getElementById(
+                "my_modal_1"
+            ) as HTMLDialogElement;
+            if (modal) {
+                setUpdateFlag(!updateFlag);
+                modal.close();
+            }
             setLoading(false);
+            setTagFlag(!tagFlag);
         })
     };
 
     useEffect(() => {
+        setTagList((prevTagList) =>
+            prevTagList.map((tag) => ({ ...tag, checked: false }))
+        );
         fetch('api/ui/getTag')
         .then((res) => {
             return res.json();
         })
         .then((data) => {
-            setTagList(data);
+            const datas: Tag[] = data;
+            setTagList(datas);
         })
-    },[])
+    }, [tagFlag])
+
+
+    const loadingWait = async () => {
+        // 三秒後にローディングを終了
+        setTimeout(() => {
+            setLoading(false);
+            console.log("loading end");
+        }, 10000);
+    }
 
     return (
         <>
@@ -148,8 +174,8 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
                         {/* <Selector title={title} placeholder={placeholder} onValueChange={selectorChange} /> */}
                             {/* <TagSelector tagName="test" /> */}
                         <div className="h-24 overflow-y-auto">{
-                            tagList.map((tag) => {
-                                return <label key={tag.tag_id} className="inline-block"><input type="checkbox" value={tag.tag_id} className="checkbox checkbox-xs" onChange={handleCheckboxChange} /> {tag.name}　</label>
+                            tagList1.map((tag) => {
+                                return <label key={tag.tag_id} className="inline-block"><input type="checkbox" value={tag.tag_id} className="checkbox checkbox-xs" onChange={handleCheckboxChange} checked={tag.checked}/> {tag.name}　</label>
                             }
                             )
                         }</div>
@@ -163,6 +189,7 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
                                 "my_modal_1"
                             ) as HTMLDialogElement;
                             if (modal) {
+                                setShowAlert(false);
                                 modal.close();
                             }
 

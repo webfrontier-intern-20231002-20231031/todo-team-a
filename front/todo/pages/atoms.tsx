@@ -12,5 +12,10 @@ export const loadingState = atom({
 
 export const updateFlagState = atom({
     key: "updateFlagState",
-    default: false,
+    default: true,
+});
+
+export const deleteFlagState = atom({
+    key: "deleteFlagState",
+    default: true,
 });

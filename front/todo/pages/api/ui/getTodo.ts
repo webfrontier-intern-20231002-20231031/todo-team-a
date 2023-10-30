@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await fetch("http://127.0.0.1:8000/v1/todo/")
         .then(res => res.json())
         .then(json => {
-            console.log(json);
+            // console.log(json);
             // console.log(json[0].tags);
              todos = json.map((item: any) => ({
                 ...item,
@@ -37,9 +37,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 updated_at: Math.floor(new Date(item.updated_at).getTime() / 1000),
             }));
 
-            console.log(todos[0].title+":"+todos[0].created_at);
-            console.log( todos[1].title+":"+todos[2].created_at);
-            console.log(todos[2].title + ":" +todos[3].created_at);
+            // console.log(todos[0].title+":"+todos[0].created_at);
+            // console.log( todos[1].title+":"+todos[2].created_at);
+            // console.log(todos[2].title + ":" +todos[3].created_at);
+
+            // console.log(todos[0].title + ":" + todos[0].title);
 
             todos.sort((a, b) => {
                 return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();

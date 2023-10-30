@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 
 import { useRecoilState } from "recoil";
-import { todoListState } from "../../atoms";
+import { deleteFlagState, todoListState, updateFlagState } from "../../atoms";
 import { todo } from "node:test";
 
 const Modal2 = () => {
 
     // recoil用
     const [todo_delId, setTodo_delId] = useRecoilState(todoListState);
+    const [deleteFlag, setDeleteFlag] = useRecoilState(deleteFlagState);
+    const [updateFlag, setUpdateFlag] = useRecoilState(updateFlagState);
 
     const todoDeleted = () => {
 
@@ -21,7 +23,6 @@ const Modal2 = () => {
         })
             .then((res) => {
                 if (res.ok) {
-                    console.log("deleted");
                 } else {
                     console.log("delete failed");
                 }
@@ -29,6 +30,11 @@ const Modal2 = () => {
             .catch((err) => {
                 console.log(err);
             })
+            .finally(() => {
+                console.log("deleted");
+                setDeleteFlag(!deleteFlag);
+                setUpdateFlag(!updateFlag);
+            });
     }
 
     return (
