@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
 
 from app import database
-from schemas.schema import CreateUpdateTagSchema, TagSchema
+from schemas.schema import CreateUpdateTagSchema, TagSchema, TodoTagSchema
 from crud import tag
 router = APIRouter()
 
@@ -12,6 +12,13 @@ def read(db: Session = Depends(database.get_db), skip: int = 0, limit: int = 100
     """
     Retrieve todos.
     """
+
+    tags = tag.get(db=db, skip=skip, limit=limit)
+    return tags
+
+
+@router.get('/only', response_model=list[TodoTagSchema])
+def read_only_tag(db: Session = Depends(database.get_db), skip: int = 0, limit: int = 100):
 
     tags = tag.get(db=db, skip=skip, limit=limit)
     return tags
