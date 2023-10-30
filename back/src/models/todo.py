@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, Integer, String
+from sqlalchemy import Boolean, DateTime, Integer, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql.expression import text
 from sqlalchemy.types import TIMESTAMP
@@ -9,6 +9,7 @@ from app.database import Base
 
 from models.tag import TagModel
 from models.todo_tag import TodoTagModel
+from models.user import UserModel
 
 
 class TodoModel(Base):
@@ -21,6 +22,12 @@ class TodoModel(Base):
     )
     deleted: Mapped[bool] = mapped_column(                                      # 論理削除
         Boolean, nullable=False, default=False, server_default="False"
+    )
+    user_email: Mapped[str] = mapped_column(                                    # user情報
+        String(256), ForeignKey('user.email'), nullable=False
+    )
+    user: Mapped["UserModel"] = relationship(
+        UserModel, back_populates="todos"
     )
     tags: Mapped[list["TagModel"]] = relationship(
         TagModel, secondary=TodoTagModel.__tablename__, back_populates="todos"
