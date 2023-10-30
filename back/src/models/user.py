@@ -11,9 +11,12 @@ from app.database import Base
 class UserModel(Base):
     __tablename__ = "user"
 
-    email: Mapped[str] = mapped_column(String(256), primary_key=True, nullable=False) 
+    user_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    email: Mapped[str] = mapped_column(String(256), nullable=False) 
     password: Mapped[str] = mapped_column(String(256), nullable=False)
+    user_name: Mapped[str] = mapped_column(String(256), nullable=False, server_default="unknown")
     todos: Mapped[list["TodoModel"]] = relationship("TodoModel", back_populates="user")     # 逆引きがしやすくなるよう
+    tags: Mapped[list["TagModel"]] = relationship("TagModel", back_populates="user")
     created_at: Mapped[datetime] = mapped_column(
         TIMESTAMP(timezone=True),
         nullable=False,
