@@ -44,6 +44,8 @@ const initialFormData: FormData = {
 
 const Modal = ({title, placeholder}: ModalSelectorProps) => {
 
+    const [tagDemo, setTagDemo] = useState<Tag[]>([]);
+
     const [loading, setLoading] = useRecoilState(loadingState);
     const [updateFlag, setUpdateFlag] = useRecoilState(updateFlagState);
 
@@ -138,14 +140,35 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
         setTagList((prevTagList) =>
             prevTagList.map((tag) => ({ ...tag, checked: false }))
         );
-        fetch('api/ui/getTag')
-        .then((res) => {
-            return res.json();
-        })
-        .then((data) => {
-            const datas: Tag[] = data;
-            setTagList(datas);
-        })
+        // fetch('api/ui/getTag')
+        // .then((res) => {
+        //     try {
+        //         return res.json();
+        //     }catch(err) {
+        //         setTagDemo([
+        //             {
+        //                 tag_id: 1,
+        //                 name: "test",
+        //                 checked: false
+        //             }
+        //         ]);
+        //         return tagDemo;
+        //     }
+        // })
+        // .then((data) => {
+        //     const datas: Tag[] = data;
+        //     setTagList(datas);
+        // })
+        const getTag = async () => {
+        const response = await fetch('api/ui/getTag');
+        var data;
+            try {
+                data = await response.json();
+            } catch (error) {
+                return;
+            }
+        }
+        getTag();
     }, [tagFlag])
 
 
