@@ -10,6 +10,7 @@ import { da } from 'date-fns/locale';
 const LoginFream = () => {
 
     const [page, setPage] = useState('login');
+    const [url, setUrl] = useState('api/login');
 
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
@@ -65,6 +66,9 @@ const LoginFream = () => {
         event.preventDefault();
         // handle form submission
         console.log("submit");
+
+
+
         setLoading(true);
         fetch('api/login', {
             method: 'POST',
@@ -78,7 +82,7 @@ const LoginFream = () => {
         .finally(() => {
             setData(jsonData);
             loadingWait();
-            router.push('/todo');
+            // router.push('/todo');
         }
         );
     };

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 import { useRecoilState } from "recoil";
-import { deleteFlagState, todoListState, updateFlagState } from "../../atoms";
+import { deleteFlagState, todoListState, updateFlagState, userDataState } from "../../atoms";
 import { todo } from "node:test";
 
 const Modal2 = () => {
@@ -10,6 +10,7 @@ const Modal2 = () => {
     const [todo_delId, setTodo_delId] = useRecoilState(todoListState);
     const [deleteFlag, setDeleteFlag] = useRecoilState(deleteFlagState);
     const [updateFlag, setUpdateFlag] = useRecoilState(updateFlagState);
+    const [userData, setUserData] = useRecoilState(userDataState);
 
     const todoDeleted = () => {
 

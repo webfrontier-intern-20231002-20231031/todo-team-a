@@ -10,6 +10,7 @@ import Sort from "./svg_button/sort";
 import TodoCard from "./card/todocard";
 import { todo } from "node:test";
 import { get } from "node:https";
+import { da } from "date-fns/locale";
 
 interface Todo {
     id: number;
@@ -151,8 +152,6 @@ const NavBar = () => {
             setFirst(false);
             console.log("first");
         }
-
-        console.log(userData);
      }, [first])
 
      useEffect(() => {
@@ -166,6 +165,7 @@ const NavBar = () => {
             await loadingWait();
         }
         loadingEff();
+        console.log(userData);
     }, [updateFlag])
 
     useEffect(() => {
