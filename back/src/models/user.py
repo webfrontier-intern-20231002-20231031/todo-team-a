@@ -8,8 +8,6 @@ from datetime import datetime
 
 from app.database import Base
 
-#from models.todo import TodoModel
-
 class UserModel(Base):
     __tablename__ = "user"
 
