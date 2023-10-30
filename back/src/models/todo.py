@@ -23,8 +23,8 @@ class TodoModel(Base):
     deleted: Mapped[bool] = mapped_column(                                      # 論理削除
         Boolean, nullable=False, default=False, server_default="False"
     )
-    user_email: Mapped[str] = mapped_column(                                    # user情報
-        String(256), ForeignKey('user.email'), nullable=False
+    user_id: Mapped[str] = mapped_column(                                       # user情報
+        Integer, ForeignKey('user.user_id'), nullable=False
     )
     user: Mapped["UserModel"] = relationship(
         UserModel, back_populates="todos"
