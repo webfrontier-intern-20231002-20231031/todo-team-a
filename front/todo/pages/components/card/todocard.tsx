@@ -14,8 +14,8 @@ type TodoCardProps = {
     title: string
     owner: string
     tag: string[]
-    created: string
-    updated: string
+    created: number
+    updated: number
 
     propBtnColor: string
     propCompleted: boolean
@@ -34,19 +34,19 @@ const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted
     const [todo_delId, setTodo_delId] = useRecoilState(todoListState);
 
     // 時間のformat
-    const formatTime = (time: string) => {
-        const createdDate = new Date(time);
-        const year = createdDate.getFullYear().toString().slice(-2);
-        const createdFormatted = createdDate.toLocaleString("ja-JP", {
-            timeZone: "Asia/Tokyo",
-            year: "2-digit",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit"
-        });
+    const formatTime = (time: number) => {
+        const createdDate = new Date(time * 1000);
+        const year = createdDate.getFullYear();
+        const month = ("0" + (createdDate.getMonth() + 1)).slice(-2);
+        const day = ("0" + createdDate.getDate()).slice(-2);
+        const hour = ("0" + createdDate.getHours()).slice(-2);
+        const minute = ("0" + createdDate.getMinutes()).slice(-2);
+        const createdFormatted = `${year}-${month}-${day} ${hour}:${minute}`;
+
+        // console.log(createdFormatted);
+
         return createdFormatted;
-    }
+    };
 
     const todoCompleted = () => {
 
@@ -87,7 +87,7 @@ const TodoCard = ({ title,owner,tag,created,updated, propBtnColor, propCompleted
                 </div>
                 <div className="flex">
                     <div>
-                        <p>作成者: {owner}</p>
+                        <p>作成者: {owner ? owner : "unknown"}</p>
                         {/* <p>タグ:
                             {tag.map((tag, index) => {
                                 console.log(title,tag);

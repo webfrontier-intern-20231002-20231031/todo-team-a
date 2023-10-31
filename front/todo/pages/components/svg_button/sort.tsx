@@ -15,11 +15,9 @@ const Sort = ({sortNum, onTabIndexChange}: SortProps) => {
     return (
     <div className="form-control  max-w-xs mr-5">
             <select className="select select-info select-xs max-w-xs" onChange={handleValueChange} value={sortNum}>
-            <option disabled value={0} selected>Sort</option>
-            <option value={1}>Added order ASC</option>
-            <option value={2}>Added order DESC</option>
-            <option value={3}>Update order ASC</option>
-            <option value={4}>Update order DESC</option>
+            {/* <option disabled value={0}>Sort</option> */}
+            <option value={1} selected>作成順</option>
+            <option value={2}>更新順</option>
         </select>
     </div>
     )
