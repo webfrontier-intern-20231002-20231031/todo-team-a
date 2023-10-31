@@ -1,8 +1,8 @@
-"""postgres: fix relationship table
+"""Added columns.
 
-Revision ID: 833f42aafb2a
-Revises: d13f86395cea
-Create Date: 2023-10-31 10:49:18.876702
+Revision ID: 6a046439324f
+Revises: cc10edc6fe5a
+Create Date: 2023-10-31 11:56:52.312806
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '833f42aafb2a'
-down_revision = 'd13f86395cea'
+revision = '6a046439324f'
+down_revision = 'cc10edc6fe5a'
 branch_labels = None
 depends_on = None
 
