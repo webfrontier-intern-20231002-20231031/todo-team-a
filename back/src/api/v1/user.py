@@ -12,6 +12,15 @@ router = APIRouter()
 def create(user_schema: UserSchemaBase, db: Session = Depends(database.get_db)):
     user_account = db.query(UserModel).filter(UserModel.email == user_schema.email).first()
     if user_account:                                                                            # 既に登録されてる場合
-        raise HTTPException(status_code=401, detail="Email already registered")
-    user.create(db, user_schema)
-    return
+        raise HTTPException(status_code=401, detail="Email already registered")                 # このメッセージもいわゆる"情報の与えすぎ"に該当する可能性あり
+    user_id = user.create(db, user_schema)
+    return user_id
+
+
+@router.post("/login")
+def login(user_schema: UserSchemaBase, db: Session = Depends(database.get_db)):
+    user_account = db.query(UserModel).filter(UserModel.email == user_schema.email).first()
+    if user_account:                                                                            # 既に登録されてる場合
+        raise HTTPException(status_code=401, detail="Email already registered")                 # このメッセージもいわゆる"情報の与えすぎ"に該当する可能性あり
+    user_id = user.create(db, user_schema)
+    return user_id

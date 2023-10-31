@@ -15,8 +15,6 @@ class UserModel(Base):
     email: Mapped[str] = mapped_column(String(256), nullable=False) 
     password: Mapped[str] = mapped_column(String(256), nullable=False)
     user_name: Mapped[str] = mapped_column(String(256), nullable=False, server_default="unknown")
-    todos: Mapped[list["TodoModel"]] = relationship("TodoModel", back_populates="user")     # 逆引きがしやすくなるよう
-    tags: Mapped[list["TagModel"]] = relationship("TagModel", back_populates="user")
     created_at: Mapped[datetime] = mapped_column(
         TIMESTAMP(timezone=True),
         nullable=False,
