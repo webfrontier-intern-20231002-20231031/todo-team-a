@@ -23,12 +23,6 @@ class TodoModel(Base):
     deleted: Mapped[bool] = mapped_column(                                      # 論理削除
         Boolean, nullable=False, default=False, server_default="False"
     )
-    user_id: Mapped[str] = mapped_column(                                       # user情報
-        Integer, ForeignKey('user.user_id'), nullable=False
-    )
-    user: Mapped["UserModel"] = relationship(
-        UserModel, back_populates="todos"
-    )
     tags: Mapped[list["TagModel"]] = relationship(
         TagModel, secondary=TodoTagModel.__tablename__, back_populates="todos"
     )
