@@ -44,15 +44,22 @@ def update(
                     if tag_model is None:                                               # 同じtagが登録されていなかった場合
                         tag_model = TagModel(**tag)
                         update_tags.append(tag_model)
+
+                print("update_tags : ", set(update_tags))
+                print("todo_model.tag : ", set(todo_model.tags))
+                for new_tag in list(set(update_tags) - set(todo_model.tags)):
+                    todo_model.tags.append(new_tag)
+                for remove_tag in list(set(todo_model.tags) - set(update_tags)):        # 既に中間テーブルで登録されているtagの
+                    todo_model.tags.remove(remove_tag)
         else:
             setattr(todo_model, key, value)
 
-    print("update_tags : ", set(update_tags))
-    print("todo_model.tag : ", set(todo_model.tags))
-    for new_tag in list(set(update_tags) - set(todo_model.tags)):
-        todo_model.tags.append(new_tag)
-    for remove_tag in list(set(todo_model.tags) - set(update_tags)):                    # 既に中間テーブルで登録されているtagの
-        todo_model.tags.remove(remove_tag)
+    # print("update_tags : ", set(update_tags))
+    # print("todo_model.tag : ", set(todo_model.tags))
+    # for new_tag in list(set(update_tags) - set(todo_model.tags)):
+    #     todo_model.tags.append(new_tag)
+    # for remove_tag in list(set(todo_model.tags) - set(update_tags)):                    # 既に中間テーブルで登録されているtagの
+    #     todo_model.tags.remove(remove_tag)
 
     db.add(todo_model)
     db.commit()
