@@ -17,10 +17,11 @@ class TagSchemaBase(BaseModel):
 class UserSchemaBase(BaseModel):
     email: str
     password: str
+    user_id: int | None = None
 
 
 class TodoTagSchema(TagSchemaBase):
-    tag_id: int | None = None               # ここの値がある場合は、既にあるタグを割り振っている
+    tag_id: int | None = None           # ここの値がある場合は、既にあるタグを割り振っている
     name: str | None = None             # ここの値がある場合は、新規でタグを作成する必要がある
 
 

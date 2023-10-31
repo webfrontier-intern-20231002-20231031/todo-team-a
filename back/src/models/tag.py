@@ -14,12 +14,6 @@ class TagModel(Base):
 
     tag_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     name: Mapped[str] = mapped_column(String(32), nullable=False, unique=True)
-    user_id: Mapped[str] = mapped_column(                                       # user情報
-        Integer, ForeignKey('user.user_id'), nullable=False
-    )
-    user: Mapped["UserModel"] = relationship(
-        UserModel, back_populates="tags"
-    )
     deleted: Mapped[bool] = mapped_column(                                      # 論理削除
         Boolean, nullable=False, default=False, server_default="False"
     )
