@@ -39,3 +39,43 @@ next-env.d.ts
 doc/~$Todo.pptx
 .DS_Store
 .DS_Store
+back/migration/versions/1d2f43a2d4a7_postgres_fix_table.py
+back/migration/versions/3c516ab54875_postgres_add_user_table.py
+back/migration/versions/10d0eb272386_create_tables.py
+back/migration/versions/64c2273795e0_postgres_create_todo_tag_todo_tag_table.py
+back/migration/versions/93a7693ea2dd_postgres_fix_tag_table_soft_delete.py
+back/migration/versions/139e537731fe_postgres_create_user_table.py
+back/migration/versions/1885e3c6913d_postgres_fix_table.py
+back/migration/versions/39679cc997f7_postgres_create_todo_table.py
+back/migration/versions/69056712c609_create_tables.py
+back/migration/versions/78474ed3d5af_postgres_create_todo_table.py
+back/migration/versions/ca01e2aa05d2_postgres_add_user_table.py
+back/migration/versions/d13f86395cea_postgres_fix_table.py
+back/migration/versions/ed60b9731b70_postgres_create_todo_tag_todo_tag_table.py
+back/migration/versions copy/ed60b9731b70_postgres_create_todo_tag_todo_tag_table.py
+back/migration/versions copy/dcf76c6681cf_sorry.py
+back/migration/versions copy/d13f86395cea_postgres_fix_table.py
+back/migration/versions copy/ca01e2aa05d2_postgres_add_user_table.py
+back/migration/versions copy/a91008499d25_sorry.py
+back/migration/versions copy/78474ed3d5af_postgres_create_todo_table.py
+back/migration/versions copy/8829806c7f9b_sorry.py
+back/migration/versions copy/39679cc997f7_postgres_create_todo_table.py
+back/migration/versions copy/1885e3c6913d_postgres_fix_table.py
+back/migration/versions copy/139e537731fe_postgres_create_user_table.py
+back/migration/versions copy/93a7693ea2dd_postgres_fix_tag_table_soft_delete.py
+back/migration/versions copy/64c2273795e0_postgres_create_todo_tag_todo_tag_table.py
+back/migration/versions copy/3c516ab54875_postgres_add_user_table.py
+back/migration/versions copy/10d0eb272386_create_tables.py
+back/migration/versions copy/1d2f43a2d4a7_postgres_fix_table.py
+back/migration/versions/1d2f43a2d4a7_postgres_fix_table.py
+back/migration/versions/3c516ab54875_postgres_add_user_table.py
+back/migration/versions/10d0eb272386_create_tables.py
+back/migration/versions/64c2273795e0_postgres_create_todo_tag_todo_tag_table.py
+back/migration/versions/93a7693ea2dd_postgres_fix_tag_table_soft_delete.py
+back/migration/versions/139e537731fe_postgres_create_user_table.py
+back/migration/versions/1885e3c6913d_postgres_fix_table.py
+back/migration/versions/39679cc997f7_postgres_create_todo_table.py
+back/migration/versions/78474ed3d5af_postgres_create_todo_table.py
+back/migration/versions/ca01e2aa05d2_postgres_add_user_table.py
+back/migration/versions/d13f86395cea_postgres_fix_table.py
+back/migration/versions/ed60b9731b70_postgres_create_todo_tag_todo_tag_table.py

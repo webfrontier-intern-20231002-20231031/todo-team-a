@@ -164,6 +164,7 @@ const Modal = ({title, placeholder}: ModalSelectorProps) => {
         var data;
             try {
                 data = await response.json();
+                console.log(data);
             } catch (error) {
                 return;
             }
